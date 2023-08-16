@@ -1,0 +1,15 @@
+<div *ngIf="task">
+   
+    <div>
+     Description
+     <input type="text" [(ngModel)]="task.description" placeholder="Description"/>
+    </div>
+    <div>
+        Due Date
+        <input type="date" [(ngModel)]="task.dueDate" />
+        
+    </div>
+    <button type="submit" (click)="updateTask(task)" *ngIf="task.id">Save Changes</button>
+    <button  type="submit" (click)="createTask(task)" *ngIf="!task.id">Create Task</button>
+
+</div>

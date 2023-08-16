@@ -1,0 +1,26 @@
+<div class="header">
+  <h2>My To Do List</h2>
+  <button (click)="initNewTask()">Add New Task</button>
+</div>
+<table id="customers">
+  <thead>
+    <th>description</th>
+    <th>dueDate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.description }}</td>
+      <td>{{ task.dueDate }}</td>
+      <td><button (click)="editTask(task)">Edit</button></td>
+      <td *ngIf="!task.isCompleted" ><button (click)="Completed(task)"></button></td>
+      <td *ngIf="task.isCompleted"><button (click)="Completed(task)">&#10003;</button></td>        
+      <td><button (click)="deleteTask(task)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<app-edit-task [task]="taskToEdit" (taskUpdated)="updateTaskList($event)">
+
+</app-edit-task>
