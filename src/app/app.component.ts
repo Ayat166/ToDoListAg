@@ -12,14 +12,26 @@ export class AppComponent {
   tasks: Task[] =[];
   taskToEdit?: Task;
   constructor(private toDoService:TodoService){}
-  
   ngOnInit(): void{
     this.toDoService
     .getToDoList()
-    .subscribe((result: Task[]) => (this.tasks = result));
+    .subscribe((result: Task[]) => {
+      let list : Task[] =[];
+      for (let minitask of result ){
+        minitask.dueDate = minitask.dueDate.toString().split('T')[0];
+        list.push(minitask)
+      }
+      this.tasks = list;
+      
+    });
   }
   updateTaskList(tasks:Task[]){
-    this.tasks=tasks;
+    let list : Task[] =[];
+      for (let minitask of tasks ){
+        minitask.dueDate = minitask.dueDate.toString().split('T')[0];
+        list.push(minitask)
+      }
+    this.tasks = list;
   }
   initNewTask(){
     this.taskToEdit = new Task();
@@ -30,11 +42,27 @@ export class AppComponent {
   deleteTask(task:Task){
     this.toDoService
     .deleteToDoList(task)
-    .subscribe((result: Task[]) => (this.tasks = result));
+    .subscribe((result: Task[]) => {
+      let list : Task[] =[];
+      for (let minitask of result ){
+        minitask.dueDate = minitask.dueDate.toString().split('T')[0];
+        list.push(minitask)
+      }
+      this.tasks = list;
+      
+    });
   }
   Completed(task:Task){
     this.toDoService
     .completeTask(task)
-    .subscribe((result: Task[]) => (this.tasks = result));
+    .subscribe((result: Task[]) => {
+      let list : Task[] =[];
+      for (let minitask of result ){
+        minitask.dueDate = minitask.dueDate.toString().split('T')[0];
+        list.push(minitask)
+      }
+      this.tasks = list;
+      
+    });
   }
 }
